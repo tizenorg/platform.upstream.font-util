@@ -7,6 +7,7 @@ Url:            http://xorg.freedesktop.org/
 Group:          System/X11/Fonts
 Source:         %{name}-%{version}.tar.bz2
 Source1:        http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WINDOWS/CP932.TXT
+Source1001: 	font-util.manifest
 BuildRequires:  pkgconfig
 BuildRequires:  pkgconfig(xorg-macros) >= 1.8
 
@@ -16,6 +17,7 @@ creation/installation.
 
 %prep
 %setup -q
+cp %{SOURCE1001} .
 # see Bug 194720 for details
 cp %{SOURCE1} map-JISX0201.1976-0
 
@@ -26,6 +28,7 @@ cp %{SOURCE1} map-JISX0201.1976-0
 %make_install
 
 %files
+%manifest %{name}.manifest
 %defattr(-,root,root)
 %doc COPYING
 %{_bindir}/bdftruncate
